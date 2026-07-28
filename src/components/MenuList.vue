@@ -297,7 +297,7 @@ export default defineComponent({
   border-radius: 100%;
 }
 .bgg {
-  background: rgba(10, 10, 10, 1);
+  background: rgb(8, 13, 10);
   margin-top: 1rem;
   border-radius: 25px;
 }

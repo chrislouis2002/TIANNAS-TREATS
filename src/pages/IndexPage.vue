@@ -4,7 +4,7 @@
     <MenuNavigation :categories="cat_name_list" />
 
     <div id="header-section" class="q-pa-sm">
-      <div class="logobx"><img src="logo.png" id="logo" /></div>
+      <div class="logobx"><img src="logoo.png" id="logo" /></div>
       <div id="menu">MENU</div>
     </div>
 

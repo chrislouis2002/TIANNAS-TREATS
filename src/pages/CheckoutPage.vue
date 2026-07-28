@@ -85,7 +85,7 @@ export default defineComponent({
       }
 
       let handler = window.PaystackPop.setup({
-        key: "pk_test_47389f411f78f2755503aeed9b65d7a5ca91d62f", // Replace with your Paystack PUBLIC KEY
+        key: "pk_test_436ce659a2a6e0834a4920baa4fbefba581ec064", // Replace with your Paystack PUBLIC KEY
         email: customer.email,
         amount: store.cartTotal * 100, // in kobo
         currency: "NGN",

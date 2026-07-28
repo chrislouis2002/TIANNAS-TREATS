@@ -3,14 +3,15 @@
     <div class="footer-container">
       <!-- Brand / Logo -->
       <div class="footer-section flex flex-center">
-        <img src="/logo.png" alt="Logo" class="footer-logo" />
+        <img src="/logoo.png" alt="Logo" class="footer-logo" />
       </div>
 
       <!-- Contact Info -->
       <div class="footer-section">
           <p class="text-h6 text-weight-medium text-yellow-6 q-my-lg">VISIT US</p>
-        <p>📍 Solution Fun City, Awka, Anambra</p>
+        <p>📍 Along Ekwueme Square Road opposite Clinix, close to X-fit Aroma, Awka Anambra</p>
         <p>📞 +234 706 963 7571</p>
+        <p>📞 +234 812 969 1245</p>
         <p>📩 tiannarosita@gmail.com</p>
       </div>
 

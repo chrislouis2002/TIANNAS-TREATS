@@ -14,13 +14,13 @@
           class="lt-md"
         />
         <q-toolbar-title class="title">
-          <q-btn flat to="/" label="TIANNA ROSITA" />
+          <q-btn flat to="/" label="TIANNA'S TREATS" />
         </q-toolbar-title>
 
         <!-- Desktop navigation buttons -->
         <div class="gt-sm">
-          <q-btn flat to="/" label="Home" />
-          <q-btn flat to="/menu" label="Menu" />
+          <q-btn flat to="/" label="Menu" />
+          <!-- <q-btn flat to="/menu" label="Menu" /> -->
           <!-- <q-btn flat to="/about" label="About" /> -->
           <q-btn flat to="/checkout" label="Checkout" />
           <q-btn flat to="/login" label="Admin Login" />

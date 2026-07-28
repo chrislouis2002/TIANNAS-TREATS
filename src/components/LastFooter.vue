@@ -7,10 +7,10 @@
             <div class="text-white" style="font-size:20px;">07069637571</div>
         </div>
 
-        <div class="text-white q-pa-xs" style="font-size:20px;display:inline-flex;justify-content:center;align-items:center;">
+        <!-- <div class="text-white q-pa-xs" style="font-size:20px;display:inline-flex;justify-content:center;align-items:center;">
         <q-icon name="pin_drop" size="20px"/>
-        <span>SOLUTION FUN CITY, AWKA</span>
-        </div>
+        <span>solution fun city </span>
+        </div> -->
     </div>
 </div>
 </template>

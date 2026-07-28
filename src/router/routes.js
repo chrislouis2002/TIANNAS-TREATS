@@ -3,12 +3,12 @@ const routes = [
     path: '/',
     component: () => import('pages/MainLayout.vue'),
     children: [
-      { path: '', name: 'home', component: () => import('pages/HomePage.vue') },
-      { path: 'menu', name: 'menu', component: () => import('pages/IndexPage.vue') },
+      // { path: '', name: 'home', component: () => import('pages/HomePage.vue') },
+      { path: '', name: 'home', component: () => import('pages/IndexPage.vue') },
       { path: 'about', name: 'about', component: () => import('pages/AboutUs.vue') },
       { path: 'events', name: 'events', component: () => import('pages/EventsPage.vue') },
       { path: 'find', name: 'find', component: () => import('pages/FindUs.vue') },
-      
+
       // ✅ Checkout should hide background + footer
       { path: 'checkout', name: 'checkout', component: () => import('pages/CheckoutPage.vue'), meta: { hideFooter: true, noBackground: true } },
 
