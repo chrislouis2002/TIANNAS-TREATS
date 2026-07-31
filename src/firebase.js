@@ -3,19 +3,19 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// 📝 your Firebase config (copy from Firebase Console)
 const firebaseConfig = {
-  apiKey: "AIzaSyBV4JTbrCuJKJEOwX5qzg4sfK8jefl7PeU",
-  authDomain: "tianna--rosita.firebaseapp.com",
-  projectId: "tianna--rosita",
-  storageBucket: "tianna--rosita.firebasestorage.app",
-  messagingSenderId: "200362079339",
-  appId: "1:200362079339:web:a2fc86fe31b7fd7a122d2e",
-  measurementId: "G-J16K36N17R"
+  apiKey: "AIzaSyCptXTgfz3_MS6iSbiS15Kqbn4nzBkHsiM",
+  authDomain: "tianna-s-treats-cafe.firebaseapp.com",
+  projectId: "tianna-s-treats-cafe",
+  storageBucket: "tianna-s-treats-cafe.firebasestorage.app",
+  messagingSenderId: "218106404716",
+  appId: "1:218106404716:web:594928ac953ecbcba09d49",
+  measurementId: "G-FFYYG9H8RZ",
 };
 
-// ✅ Only start Firebase ONCE
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const app = !getApps().length
+  ? initializeApp(firebaseConfig)
+  : getApp();
 
 const auth = getAuth(app);
 const db = getFirestore(app);

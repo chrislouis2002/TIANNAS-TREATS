@@ -189,25 +189,25 @@ export default defineComponent({
     MenuNavigation,
   },
   meta: {
-    title: "Menu — Tianna Rosita Gourmet | Delicious Meals in Awka",
+    title: "Menu — Tianna's Treats | Delicious Meals in Awka",
     meta: [
       {
         name: "description",
         content:
-          "Discover our menu at Tianna Rosita Gourmet! Enjoy Nigerian and Continental dishes, freshly made and available for delivery in Awka.",
+          "Discover our menu at Tianna's Treats! Enjoy Nigerian and Continental dishes, freshly made and available for delivery in Awka.",
       },
       {
         property: "og:title",
-        content: "Menu — Tianna Rosita Gourmet | Order Delicious Meals in Awka",
+        content: "Menu — Tianna's Treats | Order Delicious Meals in Awka",
       },
       {
         property: "og:description",
         content:
-          "Explore the Tianna Rosita Gourmet menu and order freshly cooked meals for delivery or pickup in Awka, Anambra.",
+          "Explore the Tianna's Treats menu and order freshly cooked meals for delivery or pickup in Awka, Anambra.",
       },
       {
         property: "og:image",
-        content: "/logo.png",
+        content: "/logoo.png",
       },
     ],
   },
@@ -316,7 +316,7 @@ const select = (selectedItem) => {
 }
 #body {
   background: rgba(0, 0, 0, 0.8);
-  background-image: url("../6.png");
+  background-image: url("../bg1.jpg");
   background-repeat: no-repeat;
   min-width: 100%;
   min-height: 100vh;

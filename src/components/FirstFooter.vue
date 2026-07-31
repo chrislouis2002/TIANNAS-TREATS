@@ -23,7 +23,7 @@ export default defineComponent({
 <style scoped>
 .contfft{
    /* background-image:url('http://localhost:9000/6.png');*/
-    background-image:url('../6.png');
+    background-image:url('../bg4.jpg');
     background-repeat:no-repeat;
     display:flex;
     justify-content:center;

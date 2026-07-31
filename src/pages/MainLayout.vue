@@ -20,7 +20,6 @@
         <!-- Desktop navigation buttons -->
         <div class="gt-sm">
           <q-btn flat to="/" label="Menu" />
-          <!-- <q-btn flat to="/menu" label="Menu" /> -->
           <!-- <q-btn flat to="/about" label="About" /> -->
           <q-btn flat to="/checkout" label="Checkout" />
           <q-btn flat to="/login" label="Admin Login" />
@@ -44,10 +43,8 @@
         class="text-white drawer-close-btn"
       />
       <q-list>
+
         <q-item clickable to="/">
-          <q-item-section>Home</q-item-section>
-        </q-item>
-        <q-item clickable to="/menu">
           <q-item-section>Menu</q-item-section>
         </q-item>
         <q-item clickable to="/checkout">
@@ -56,7 +53,7 @@
         <q-item clickable to="/login">
           <q-item-section>Admin Login</q-item-section>
         </q-item>
-        <q-item clickable to="/about">
+        <!-- <q-item clickable to="/about">
           <q-item-section>About Us</q-item-section>
         </q-item>
         <q-item clickable to="/find">
@@ -64,7 +61,7 @@
         </q-item>
         <q-item clickable to="/events">
           <q-item-section>Events And Catering</q-item-section>
-        </q-item>
+        </q-item> -->
       </q-list>
     </q-drawer>
 

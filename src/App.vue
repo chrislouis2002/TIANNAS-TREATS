@@ -6,7 +6,7 @@
   <video autoplay muted loop playsinline>
           <source src="/slider/3D-Chef-Dancing.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>        <p>Cooking something delicious...</p>
+        </video>        <p>Tasty meals you can always trust...</p>
       </div>
     </div>
 
