@@ -222,11 +222,17 @@ export default defineComponent({
   Pizza: "pizza.png",
   Extras: "Loaded-Fries-735x490.webp",
   Salads: "salad.jpeg",
-  Drinks: "wine.png",
+  Drinks: "fruitdrinks.png",
   Desserts: "dessert.jpg",
-  "Finger Foods & Sides": "fingerfoods&sides.jpeg",
-  "Main Dishes": "rice.jpg",
-  "Burgers/Sandwiches/Wraps": "burgers.png"
+  "Grills and Fries/Finger Foods": "fingerfoods&sides.jpeg",
+  "Rice Dishes": "rice.jpg",
+  "Pasta Dishes": "pasta.jpeg",
+  Burger: "burgers.png",
+  Bakery: "dessert.jpg",
+  Cocktails: "wine.png",
+  Soups: "catfish-peppersoup.jpg",
+  "Specialty Sauces": "sauces.jpeg",
+  "Breakfast/Brunch": "english_breakfast.jpeg"
 
   // Add all your real category names here!
 };

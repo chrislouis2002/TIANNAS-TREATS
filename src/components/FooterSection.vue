@@ -55,7 +55,7 @@
     </div>
 
     <div class="footer-bottom q-mt-md text-center">
-      © {{ new Date().getFullYear() }} Tianna Rosita Gourmet • All Rights Reserved
+      © {{ new Date().getFullYear() }} Tianna's Treats Cafe • All Rights Reserved
     </div>
   </footer>
 </template>

@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <!-- Header -->
     <div class="row items-center justify-between q-mb-md">
-      <div class="text-h5">🍴 Tianna Rosita Gourmet - Admin Dashboard</div>
+      <div class="text-h5">🍴 Tianna's Treats Cafe - Admin Dashboard</div>
       <div class="row q-gutter-sm">
         <q-btn dense flat color="primary" label="Settings" @click="tab = 'settings'" />
         <q-btn label="Logout" color="negative" @click="logout" />
@@ -221,7 +221,7 @@ const editingItem = ref(null)
 
 // settings object (will be loaded/saved to Firestore)
 const settings = ref({
-  restaurantName: "Tianna Rosita Gourmet",
+  restaurantName: "Tianna's Treats Cafe",
   contactEmail: "",
   contactPhone: "",
   currencySymbol: "₦",
@@ -393,7 +393,7 @@ async function saveSettings() {
 
 function loadDefaultSettings() {
   settings.value = {
-    restaurantName: "Tianna Rosita Gourmet",
+    restaurantName: "Tianna's Treats Cafe",
     contactEmail: "",
     contactPhone: "",
     currencySymbol: "₦",
