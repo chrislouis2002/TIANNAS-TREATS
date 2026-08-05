@@ -12,7 +12,7 @@
         <p>📍 Along Ekwueme Square Road opposite Clinix, close to X-fit Aroma, Awka Anambra</p>
         <p>📞 +234 706 963 7571</p>
         <p>📞 +234 812 969 1245</p>
-        <p>📩 tiannarosita@gmail.com</p>
+        <p>📩 tiannastreats.gifts@gmail.com</p>
       </div>
 
       <!-- Working Hours -->
