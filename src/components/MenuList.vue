@@ -1,5 +1,8 @@
 <template>
-  <div class="bgg">
+  <div
+    class="bgg"
+    :id="`menu-category-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`"
+  >
     <div class="q-pa-sm imgcc" style="display: flex; justify-content: center">
       <div class="img-tray-outer">
         <div class="img-tray-inner">
@@ -12,74 +15,79 @@
       <div class="title-cat">{{ category }}</div>
       <div v-if="description" class="food-info q-mb-md">{{ description }}</div>
 
-      <div class="listxcont">
-        <div
-          class="listx"
+      <div class="menu-grid">
+        <article
           v-for="(item, i) in foods"
-          :key="i"
-          style="
-            padding: 10px;
-            min-width: 100%;
-            display: grid;
-            grid-template-rows: auto;
-            grid-template-columns: 30% 75%;
-            justify-content: space-between;
-          "
+          :key="item.id || i"
+          class="menu-card"
+          @click="openProduct(item)"
         >
-          <div style="display: flex; justify-content: flex-start">
-            <div class="outer-count">
-              <div class="inner-count">{{ i + 1 }}</div>
+          <div class="menu-image-wrap">
+            <img
+              v-if="item.image"
+              :src="item.image"
+              :alt="item.name"
+              class="menu-item-image"
+            />
+            <div v-else class="menu-image-placeholder">
+              <q-icon name="restaurant" size="42px" />
             </div>
           </div>
 
-          <div class="food-info">
-            <div>
-              <div>
-                {{ item.name }}
-                <div class="view-btn-container"></div>
-              </div>
-              <div v-if="item.size">{{ item.size }}</div>
-              <div class="btncc">
-                <div class="quantity-controls">
-                  <q-btn
-                    label="View"
-                    :style="{ color: 'hsla(0, 69%, 80%, 1)' }"
-                    unelevated
-                    class="view-btn"
-                    @click="openDialog(item)"
-                  />
 
-                  <q-btn
-                    dense
-                    flat
-                    icon="remove"
-                    :style="{ color: 'hsla(0, 69%, 80%, 1)' }"
-                    @click="decreaseQuantity(item)"
-                  />
-                  <span class="quantity-display">{{ cart[item.id] || 0 }}</span>
+          <div class="menu-card-content">
+            <div class="menu-card-title">{{ item.name }}</div>
 
-                  <q-btn
-                    dense
-                    flat
-                    icon="add"
-                    :style="{ color: 'hsla(0, 69%, 80%, 1)' }"
-                    @click="increaseQuantity(item)"
-                  />
-                </div>
-              </div>
+
+            <div v-if="item.size" class="menu-card-size">
+              {{ item.size }}
             </div>
 
-            <div>
-              Price
-              {{
-                new Intl.NumberFormat("en-NG", {
-                  style: "currency",
-                  currency: "NGN",
-                }).format(item.price)
-              }}
+
+            <div v-if="item.description" class="menu-card-description">
+              {{ item.description }}
+            </div>
+
+
+            <div class="menu-card-bottom">
+              <div class="menu-card-price">
+                {{
+                  new Intl.NumberFormat("en-NG", {
+                    style: "currency",
+                    currency: "NGN",
+                  }).format(item.price)
+                }}
+              </div>
+
+
+              <div class="quantity-controls">
+                <q-btn
+                  dense
+                  flat
+                  round
+                  icon="remove"
+                  :style="{ color: 'hsla(0, 69%, 80%, 1)' }"
+                  @click.stop="decreaseQuantity(item)"
+                />
+
+
+                <span class="quantity-display">
+                  {{ cart[item.id] || 0 }}
+                </span>
+
+
+                <q-btn
+                  dense
+                  flat
+                  round
+                  icon="add"
+                  :style="{ color: 'hsla(0, 69%, 80%, 1)' }"
+                  @click.stop="increaseQuantity(item)"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </div>
@@ -149,6 +157,7 @@
 
 <script>
 import { defineComponent, computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useMenu } from "stores/menus";
 
 export default defineComponent({
@@ -163,6 +172,21 @@ export default defineComponent({
 
   setup() {
     const store = useMenu();
+    const router = useRouter();
+
+
+    const openProduct = (item) => {
+      // ✅ Save the exact menu position before opening the product
+      sessionStorage.setItem("menuScrollPosition", String(window.scrollY));
+
+      router.push({
+        name: "product",
+        params: {
+          id: item.id
+        }
+      });
+    };
+
 
     const showDialog = ref(false);
     const selectedItem = ref(null);
@@ -196,6 +220,7 @@ export default defineComponent({
       showDialog,
       selectedItem,
       openDialog,
+      openProduct,
     };
   },
 });
@@ -297,17 +322,19 @@ export default defineComponent({
   border-radius: 100%;
 }
 .bgg {
-  background: rgb(8, 13, 10);
+  background: #fff;
   margin-top: 1rem;
   border-radius: 25px;
+  border: 1px solid #eaded6;
+  box-shadow: 0 8px 28px rgba(43, 23, 18, 0.06);
 }
 .title-cat {
   overflow: break-word;
   font-size: 25px;
   font-family: "rubik";
   padding-top: 1rem;
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 1px 1px rgb(0, 0, 0);
+  color: #2b1712;
+  text-shadow: none;
 }
 .outer-count {
   height: 45px;
@@ -354,7 +381,7 @@ export default defineComponent({
 }
 .quantity-display {
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.9);
+  color: #2b1712;
   min-width: 20px;
   text-align: center;
   font-size: 16px;
@@ -362,12 +389,13 @@ export default defineComponent({
 
 /* ===== Dialog styles ===== */
 .dialog-card {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border-radius: 16px;
+  background: #ffffff;
+  color: #2b1712;
+  border-radius: 20px;
   max-width: 400px;
   width: 90%;
-backdrop-filter: blur(5px);
+  border: 1px solid #eaded6;
+  box-shadow: 0 20px 60px rgba(43, 23, 18, 0.18);
 }
 
 .dialog-image-container {
@@ -387,10 +415,185 @@ backdrop-filter: blur(5px);
 }
 .dialog-details p {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #806f68;
 }
 .dialog-details h5 {
   margin-top: 10px;
-  color: #ffcdd2;
+  color: #f4511e;
+}
+</style>
+
+
+<style scoped>
+/* ===== New menu image-card grid ===== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 18px 12px 24px;
+}
+
+
+.menu-card {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #eaded6;
+  box-shadow: 0 8px 22px rgba(43, 23, 18, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.menu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(43, 23, 18, 0.12);
+}
+
+
+.menu-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 0.82;
+  overflow: hidden;
+  background: #fff7f1;
+}
+
+
+.menu-item-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.menu-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(229, 115, 115, 0.8);
+  background: linear-gradient(
+    135deg,
+    rgba(229, 115, 115, 0.12),
+    rgba(255, 215, 64, 0.08)
+  );
+}
+
+
+.menu-card-content {
+  padding: 14px;
+}
+
+
+.menu-card-title {
+  font-family: "martian";
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #2b1712;
+}
+
+
+.menu-card-size {
+  margin-top: 5px;
+  font-family: "rubik";
+  font-size: 13px;
+  color: #806f68;
+}
+
+
+.menu-card-description {
+  margin-top: 7px;
+  font-family: "martian";
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+.menu-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+
+.menu-card-price {
+  font-family: "martian";
+  font-size: 14px;
+  font-weight: 700;
+  color: #f4511e;
+}
+
+
+.menu-card .quantity-controls {
+  flex-shrink: 0;
+  padding: 3px 6px;
+}
+
+
+@media screen and (max-width: 620px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px 6px 20px;
+  }
+
+
+  .menu-image-wrap {
+    aspect-ratio: 1 / 0.9;
+  }
+
+
+  .menu-card-content {
+    padding: 10px;
+  }
+
+
+  .menu-card-title {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+
+  .menu-card-size {
+    font-size: 11px;
+  }
+
+
+  .menu-card-description {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+
+  .menu-card-bottom {
+    margin-top: 10px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+
+  .menu-card-price {
+    font-size: 11px;
+  }
+
+
+  .menu-card .quantity-controls {
+    padding: 2px 4px;
+    gap: 2px;
+  }
+
+
+  .quantity-display {
+    font-size: 12px;
+    min-width: 14px;
+  }
 }
 </style>
