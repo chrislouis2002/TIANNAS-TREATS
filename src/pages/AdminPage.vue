@@ -124,6 +124,7 @@
               <q-input v-model="menuForm.description" label="Description (optional)" outlined class="q-mb-sm" />
               <q-input v-model="menuForm.image" label="Image (optional)" outlined class="q-mb-sm" />
               <q-toggle v-model="menuForm.available" label="Available (show to customers)" />
+              <q-toggle v-model="menuForm.popular" label="Show in Customer Faves" />
             </q-card-section>
 
             <q-card-actions align="right">
@@ -215,7 +216,8 @@ const menuForm = ref({
   category: "",
   description: "",
   image: "",
-  available: true
+  available: true,
+  popular: false
 })
 const editingItem = ref(null)
 
@@ -300,7 +302,7 @@ async function clearAllOrders() {
 
 // MENU FUNCTIONS
 function openAddDialog() {
-  menuForm.value = { name: "", price: 0, category: "", description: "", image: "", available: true }
+  menuForm.value = { name: "", price: 0, category: "", description: "", image: "", available: true, popular: false }
   editingItem.value = null
   showDialog.value = true
 }
@@ -313,7 +315,8 @@ function openEditDialog(item) {
     category: item.category || "",
     description: item.description || "",
     image: item.image || "",
-    available: item.available === undefined ? true : item.available
+    available: item.available === undefined ? true : item.available,
+    popular: item.popular === true
   }
   editingItem.value = item
   showDialog.value = true
@@ -332,6 +335,7 @@ async function saveMenuItem() {
     description: menuForm.value.description || "",
     image: menuForm.value.image || "",
     available: !!menuForm.value.available,
+    popular: !!menuForm.value.popular,
     createdAt: serverTimestamp()
   }
 

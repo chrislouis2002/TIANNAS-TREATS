@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, inMemoryPersistence, setPersistence, signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -20,4 +20,10 @@ const app = !getApps().length
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export { app, auth, db };
+
+// Do not retain an admin session across a full page reload.
+const authReady = setPersistence(auth, inMemoryPersistence)
+  .then(() => signOut(auth));
+
+
+export { app, auth, authReady, db };

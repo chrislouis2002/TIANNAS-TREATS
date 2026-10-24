@@ -1,1 +1,41 @@
 // app global css in SCSS form
+
+/* TIANNAS TREATS CAFE - GLOBAL LIGHT THEME */
+:root {
+  --tt-page-bg: #fffaf4;
+  --tt-surface: #ffffff;
+  --tt-orange: #e87519;
+  --tt-orange-hover: #cf6210;
+  --tt-brown: #35251d;
+  --tt-text: #35251d;
+  --tt-muted: #89796d;
+  --tt-border: #eee1d4;
+  --tt-soft-orange: #fff0df;
+  --tt-radius: 16px;
+}
+
+html, body, #q-app {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--tt-page-bg);
+  color: var(--tt-text);
+}
+
+.q-page {
+  color: var(--tt-text);
+}
+
+a {
+  color: var(--tt-orange);
+}
+
+a:hover {
+  color: var(--tt-orange-hover);
+}
+
+::selection {
+  background-color: var(--tt-orange);
+  color: #ffffff;
+}

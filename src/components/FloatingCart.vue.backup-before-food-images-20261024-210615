@@ -1,0 +1,452 @@
+
+
+<template>
+  <div
+    v-if="store.totalItems > 0"
+    class="cart-outer"
+    :style="cartPosition"
+    @pointerdown="startDrag"
+    @pointermove="moveDrag"
+    @pointerup="endDrag"
+    @pointercancel="endDrag"
+    @click="openCart"
+    @dragstart.prevent
+    role="button"
+    tabindex="0"
+    aria-label="Open shopping cart"
+    @keydown.enter="cartOpen = true"
+  >
+    <div class="cart-inner">
+      <img src="/13.png" alt="Shopping cart" />
+    </div>
+
+
+    <span class="cart-count">{{ store.totalItems }}</span>
+  </div>
+
+
+  <q-dialog v-model="cartOpen">
+    <q-card class="cartm">
+      <div class="cart-heading">
+        <div class="cart-title">Your Cart</div>
+        <q-btn
+          @click="cartOpen = false"
+          flat
+          round
+          dense
+          icon="close"
+          class="text-red"
+        />
+      </div>
+
+
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        :bar-style="barStyle"
+        class="cart-scroll"
+      >
+        <div
+          v-for="(item, i) in store.cart"
+          :key="item.id"
+          class="listx cart-item"
+        >
+          <div class="item-number">
+            <div class="item-number-inner">{{ i + 1 }}</div>
+          </div>
+
+
+          <div class="food-infoindex">
+            <div class="item-name">{{ item.name }}</div>
+
+
+            <div v-if="item.size" class="item-size">
+              {{ item.size }}
+            </div>
+
+
+            <q-btn
+              class="remove-item"
+              @click="store.removeFromCart(item)"
+              flat
+              round
+              dense
+              icon="close"
+              color="red"
+            />
+
+
+            <div class="item-price">
+              {{
+                new Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                }).format(item.price || 0)
+              }}
+            </div>
+
+
+            <div class="quantity-controls">
+              <q-btn
+                dense
+                flat
+                round
+                icon="remove"
+                aria-label="Decrease quantity"
+                @click="store.decreaseQuantity(item)"
+              />
+              <span>{{ item.quantity }}</span>
+              <q-btn
+                dense
+                flat
+                round
+                icon="add"
+                aria-label="Increase quantity"
+                @click="store.addToCart(item)"
+              />
+            </div>
+          </div>
+        </div>
+      </q-scroll-area>
+
+
+      <div class="cart-total">
+        <span>Total</span>
+        <strong>
+          {{
+            new Intl.NumberFormat("en-NG", {
+              style: "currency",
+              currency: "NGN",
+            }).format(store.cartTotal)
+          }}
+        </strong>
+      </div>
+
+
+      <div class="checkout-button">
+        <q-btn
+          color="red"
+          label="Checkout"
+          class="q-px-lg q-py-sm"
+          to="/checkout"
+          @click="cartOpen = false"
+        />
+      </div>
+    </q-card>
+  </q-dialog>
+</template>
+
+
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useMenu } from "stores/menus";
+
+
+const store = useMenu();
+const cartOpen = ref(false);
+
+
+const left = ref(null);
+const top = ref(48);
+
+
+let dragging = false;
+let moved = false;
+let startX = 0;
+let startY = 0;
+let originX = 0;
+let originY = 0;
+
+
+const cartPosition = computed(() => ({
+  left: left.value === null ? "auto" : `${left.value}px`,
+  top: `${top.value}px`,
+  right: left.value === null ? "16px" : "auto",
+  touchAction: "none",
+}));
+
+
+const thumbStyle = {
+  right: "2px",
+  borderRadius: "5px",
+  backgroundColor: "#e57373",
+  width: "5px",
+  opacity: 0.75,
+};
+
+
+const barStyle = {
+  right: "0px",
+  borderRadius: "9px",
+  backgroundColor: "rgba(229, 115, 115, 0.15)",
+  width: "9px",
+  opacity: 0.3,
+};
+
+
+function clampPosition(x, y) {
+  const maxX = Math.max(0, window.innerWidth - 80);
+  const maxY = Math.max(0, window.innerHeight - 80);
+
+
+  left.value = Math.min(Math.max(0, x), maxX);
+  top.value = Math.min(Math.max(0, y), maxY);
+}
+
+
+function startDrag(event) {
+  if (event.button !== undefined && event.button !== 0) return;
+
+
+  dragging = true;
+  moved = false;
+  startX = event.clientX;
+  startY = event.clientY;
+
+
+  const rect = event.currentTarget.getBoundingClientRect();
+  originX = rect.left;
+  originY = rect.top;
+
+
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+
+
+function moveDrag(event) {
+  if (!dragging) return;
+
+
+  const dx = event.clientX - startX;
+  const dy = event.clientY - startY;
+
+
+  if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+    moved = true;
+  }
+
+
+  if (moved) {
+    clampPosition(originX + dx, originY + dy);
+  }
+}
+
+
+function endDrag() {
+  dragging = false;
+}
+
+
+function openCart() {
+  if (moved) {
+    moved = false;
+    return;
+  }
+
+
+  cartOpen.value = true;
+}
+
+
+function handleResize() {
+  if (left.value !== null) {
+    clampPosition(left.value, top.value);
+  }
+}
+
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
+</script>
+
+
+<style scoped>
+.cart-outer {
+  position: fixed;
+  z-index: 9999;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 1px 1px 20px #0004, -1px -1px 20px #0002;
+  cursor: grab;
+  user-select: none;
+}
+
+
+.cart-outer:active {
+  cursor: grabbing;
+}
+
+
+.cart-inner {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #0003;
+  pointer-events: none;
+}
+
+
+.cart-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 50px;
+  background: #e57373;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+
+.cartm {
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 25px;
+  background: rgba(25, 20, 20, 0.96);
+  color: white;
+}
+
+
+.cart-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+
+.cart-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+.cart-scroll {
+  height: 400px;
+  max-width: 100%;
+}
+
+
+.cart-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr);
+  gap: 12px;
+  padding: 15px 8px;
+  border-bottom: 1px solid #e5737399;
+}
+
+
+.item-number {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e57373;
+}
+
+
+.item-number-inner {
+  color: white;
+  font-size: 14px;
+}
+
+
+.food-infoindex {
+  position: relative;
+  min-width: 0;
+  padding-right: 30px;
+  overflow-wrap: anywhere;
+}
+
+
+.item-name {
+  font-weight: bold;
+}
+
+
+.item-size {
+  margin-top: 4px;
+  color: #ddd;
+  font-size: 13px;
+}
+
+
+.remove-item {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+
+.item-price {
+  margin-top: 10px;
+}
+
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 8px 8px;
+  font-size: 17px;
+}
+
+
+.checkout-button {
+  padding: 12px 0 5px;
+  text-align: center;
+}
+
+
+@media (max-width: 400px) {
+  .cartm {
+    padding: 8px;
+  }
+
+
+  .cart-scroll {
+    height: 55vh;
+    max-height: 400px;
+  }
+}
+</style>
+

@@ -61,6 +61,8 @@ export const useMenu = defineStore("menu", {
             image: data.image || "",
             description: data.description || "",
             size: data.size || "",
+            popular: data.popular === true,
+            available: data.available !== false,
           });
         });
 

@@ -19,8 +19,8 @@
 
 <script setup>
 import { ref } from "vue";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "src/firebase";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth, authReady, db } from "src/firebase";
 import { useRouter } from "vue-router";
 
 
@@ -28,10 +28,34 @@ const email = ref("");
 const password = ref("");
 const router = useRouter();
 
+const ADMIN_EMAIL = "tiannastreats.gifts@gmail.com";
+
+
 async function login() {
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value);
-    router.push("/admin"); // redirect to admin dashboard
+    await authReady;
+
+
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      email.value.trim(),
+      password.value
+    );
+
+
+    if (credential.user.email?.toLowerCase() !== ADMIN_EMAIL) {
+      await signOut(auth);
+      alert("This account is not authorized to access the admin dashboard.");
+      return;
+    }
+
+
+    const redirect = router.currentRoute.value.query.redirect;
+    await router.replace(
+      typeof redirect === "string" && redirect.startsWith("/")
+        ? redirect
+        : "/admin"
+    );
   } catch (err) {
     alert("Login failed: " + err.message);
   }

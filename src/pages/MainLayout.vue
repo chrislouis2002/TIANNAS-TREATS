@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf" :class="!isExcluded ? 'bg-dark-layout' : ''">
     <!-- Header -->
-    <q-header elevated class="bg-black">
+    <q-header elevated class="tt-header">
       <q-toolbar>
 
         <!-- Hamburger button for mobile -->
@@ -14,15 +14,16 @@
           class="lt-md"
         />
         <q-toolbar-title class="title">
-          <q-btn flat to="/" label="TIANNA'S TREATS" />
+          <q-btn flat to="/" label="TIANNA'S TREATS CAFE" />
         </q-toolbar-title>
 
         <!-- Desktop navigation buttons -->
         <div class="gt-sm">
-          <q-btn flat to="/" label="Menu" />
-          <!-- <q-btn flat to="/about" label="About" /> -->
+          <q-btn flat to="/" label="Home" />
+          <q-btn flat to="/menu" label="Menu" />
+          <!-- <q-btn flat to="/about" label="About Us" /> -->
           <q-btn flat to="/checkout" label="Checkout" />
-          <q-btn flat to="/login" label="Admin Login" />
+
         </div>
 
       </q-toolbar>
@@ -32,7 +33,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       side="left"
-      class="bg-black text-white lt-md"
+      class="tt-drawer lt-md"
     >
       <q-btn
         flat
@@ -45,6 +46,9 @@
       <q-list>
 
         <q-item clickable to="/">
+          <q-item-section>Home</q-item-section>
+        </q-item>
+        <q-item clickable to="/menu">
           <q-item-section>Menu</q-item-section>
         </q-item>
         <q-item clickable to="/checkout">
@@ -58,8 +62,8 @@
         </q-item>
         <q-item clickable to="/find">
           <q-item-section>Find Us</q-item-section>
-        </q-item>
-        <q-item clickable to="/events">
+        </q-item> -->
+        <!-- <q-item clickable to="/events">
           <q-item-section>Events And Catering</q-item-section>
         </q-item> -->
       </q-list>
@@ -72,6 +76,7 @@
       <!-- Footer hidden only on excluded pages -->
       <FooterSection v-if="!isExcluded" />
     </q-page-container>
+    <FloatingCart />
   </q-layout>
 </template>
 
@@ -79,7 +84,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import FooterSection from 'src/components/FooterSection.vue'
-
+import FloatingCart from 'src/components/FloatingCart.vue'
 const leftDrawerOpen = ref(false)
 const route = useRoute()
 
@@ -93,10 +98,54 @@ const isExcluded = computed(() => excludePages.includes(route.name))
 <style>
 .title {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 800;
 }
 
+
+.tt-header {
+  background: #fffaf4 !important;
+  color: #35251d !important;
+  border-bottom: 1px solid #eee1d4;
+  box-shadow: 0 2px 12px rgba(53, 37, 29, 0.06);
+}
+
+
+.tt-header .q-btn {
+  color: #35251d;
+}
+
+
+.tt-header .q-btn:hover {
+  color: #e87519;
+}
+
+
+.tt-drawer {
+  background: #ffffff !important;
+  color: #35251d !important;
+  border-right: 1px solid #eee1d4;
+}
+
+
+.tt-drawer .q-item {
+  color: #35251d;
+  border-radius: 10px;
+  margin: 4px 10px;
+}
+
+
+.tt-drawer .q-item:hover {
+  background: #fff0df;
+  color: #e87519;
+}
+
+
+.drawer-close-btn {
+  color: #35251d !important;
+}
+
+
 .bg-dark-layout {
-  background-color: #07070a;
+  background-color: #f7f4ff;
 }
 </style>

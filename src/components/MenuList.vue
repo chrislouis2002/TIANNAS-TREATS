@@ -16,12 +16,17 @@
       <div v-if="description" class="food-info q-mb-md">{{ description }}</div>
 
       <div class="menu-grid">
-        <article
-          v-for="(item, i) in foods"
-          :key="item.id || i"
-          class="menu-card"
-          @click="openProduct(item)"
-        >
+
+
+<article
+  v-for="(item, i) in foods"
+  :key="item.id || i"
+  :id="`menu-item-${item.id}`"
+  class="menu-card"
+  @click="openProduct(item)"
+>
+
+
           <div class="menu-image-wrap">
             <img
               v-if="item.image"
@@ -170,22 +175,27 @@ export default defineComponent({
     description: { type: String, default: undefined },
   },
 
-  setup() {
+  setup(props) {
     const store = useMenu();
     const router = useRouter();
 
 
-    const openProduct = (item) => {
-      // ✅ Save the exact menu position before opening the product
-      sessionStorage.setItem("menuScrollPosition", String(window.scrollY));
 
-      router.push({
-        name: "product",
-        params: {
-          id: item.id
-        }
-      });
-    };
+
+const openProduct = (item) => {
+  router.push({
+    name: "product",
+    params: {
+      id: item.id,
+    },
+    query: {
+      category: props.category || undefined,
+      scrollTo: String(item.id),
+    },
+  });
+};
+
+
 
 
     const showDialog = ref(false);

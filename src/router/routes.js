@@ -3,10 +3,12 @@ const routes = [
     path: '/',
     component: () => import('pages/MainLayout.vue'),
     children: [
-      // { path: '', name: 'home', component: () => import('pages/HomePage.vue') },
-      { path: '', name: 'home', component: () => import('pages/IndexPage.vue') },
+      { path: '', name: 'home', component: () => import('pages/HomePage.vue') },
+      { path: 'menu', name: 'menu', component: () => import('pages/IndexPage.vue') },
       { path: 'about', name: 'about', component: () => import('pages/AboutUs.vue') },
       { path: 'events', name: 'events', component: () => import('pages/EventsPage.vue') },
+      { path: 'product/:id', name: 'product', component: () => import('pages/ProductPage.vue') },
+
       { path: 'find', name: 'find', component: () => import('pages/FindUs.vue') },
 
       // ✅ Checkout should hide background + footer
