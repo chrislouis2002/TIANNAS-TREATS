@@ -26,8 +26,8 @@
         <p class="eyebrow">A LITTLE JOY IN EVERY BITE</p>
 
         <h1>
-          Made to
-          <span>Crave.</span>
+          Delivery in
+          <span>Minutes.</span>
         </h1>
 
         <!-- <p class="hero-description">
@@ -67,7 +67,7 @@
           v-else
           :src="'/minichefs.png'"
           class="food-image"
-          alt="Tianna Rosita signature food with miniature chefs"
+          alt="Tianna signature food with miniature chefs"
           draggable="false"
           @error="foodImageAvailable = false"
         />
@@ -252,7 +252,7 @@
 
         <div class="phone-caption">
           <span class="online-dot"></span>
-          Chat with Tianna Rosita
+          Chat with Tianna's Treats Cafe
         </div>
       </div>
     </main>
@@ -279,7 +279,7 @@ const foodImageAvailable = ref(true)
 const WHATSAPP_NUMBER = '2347069637571'
 
 const defaultOrderMessage =
-  'Hi Tianna Rosita! I would like to place an order. Please send me your menu.'
+  "Hi Tianna's Treats! I would like to place an order. Please send me your menu."
 
 function whatsappUrl(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`

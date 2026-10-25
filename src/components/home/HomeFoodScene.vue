@@ -40,10 +40,17 @@
 
 
       <!-- Brand signature -->
-      <div class="food-brand">
-        <span class="brand-mark">T</span>
-        <span class="brand-name">TIANNA'S TREATS</span>
-      </div>
+      
+
+<!-- Brand signature -->
+<div class="food-brand">
+  <img
+    src="/logoo.png"
+    class="food-brand-logo"
+  />    <span class="brand-name">TIANNA'S TREATS CAFE</span>
+
+</div>
+
 
 
       <!-- Left editorial caption -->
@@ -132,7 +139,8 @@
 
 
 /* ---------------------------------------
-   TIANNA'S TREATS — CINEMATIC FOOD HERO
+   
+ — CINEMATIC FOOD HERO
 ---------------------------------------- */
 
 
@@ -234,36 +242,35 @@
 /* Brand signature */
 
 
-.food-brand {
-  position: absolute;
-  top: 6%;
-  left: 5%;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  color: var(--cream);
-}
-
-
-.brand-mark {
-  display: grid;
-  width: 37px;
-  height: 37px;
-  place-items: center;
-  border: 1px solid rgba(255, 248, 239, 0.75);
-  border-radius: 50%;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 23px;
-  font-style: italic;
-  line-height: 1;
-}
-
 
 .brand-name {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.2em;
+   margin-left: -10px;
+}
+
+
+
+.food-brand {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: left;
+  margin-left: -20px;
+}
+
+
+.food-brand-logo {
+  display: block;
+  width: 90px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 

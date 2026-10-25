@@ -96,10 +96,19 @@ const isExcluded = computed(() => excludePages.includes(route.name))
 </script>
 
 <style>
+
+
 .title {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-family: "Arial Black", "Impact", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #32180d;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.4px currentColor;
 }
+
+
 
 
 .tt-header {
