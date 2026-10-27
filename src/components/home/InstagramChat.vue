@@ -345,12 +345,12 @@ const conversation = [
     image:
       '/slider/igchat-image.png',
     alt: 'A delicious rice dish',
-    caption: 'This FOOD IS INSANELY GOOD!!! 🤤'
+    caption: 'This FOOD IS INSANELY GOOD!!! Thanks a lot 🤤'
   },
   {
     from: 'cafe',
     kind: 'text',
-    text: 'Your cravings deserve the best! ✨'
+    text: "You're welcome. Your cravings deserve the best! ✨"
   }
 ]
 
