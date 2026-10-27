@@ -290,7 +290,7 @@ const conversation = [
   {
     from: 'me',
     kind: 'text',
-    text: 'Heyyy! 🧡 I want asun rice and a strawberry milkshake please!'
+    text: 'Heyyy Tianna! 🧡 I just placed an order from your website!'
   },
   {
     from: 'cafe',
@@ -300,35 +300,29 @@ const conversation = [
   {
     from: 'cafe',
     kind: 'text',
-    text: 'That combo is about to make your day 🔥'
-  },
-  {
-    from: 'me',
-    kind: 'media',
-    image:
-      'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=500&q=80',
-    alt: 'A delicious rice dish',
-    caption: 'This is the rice I want 😍'
-  },
-  {
-    from: 'me',
-    kind: 'text',
-    text: 'And one strawberry milkshake 🍓🥤'
+    text: 'Yes Mabel! your order is confirmed'
   },
   {
     from: 'cafe',
     kind: 'text',
-    text: 'Perfect! We’ll confirm your total before payment 🧡'
-  },
-  {
-    from: 'me',
-    kind: 'text',
-    text: 'How long does delivery take?'
+    text: 'Your  order is a Double King Burger, cheesy pepperoni pizza, fries, asun rice and a strawberry milkshake'
   },
   {
     from: 'cafe',
     kind: 'text',
-    text: 'We’ll confirm the delivery time and fee when you order 😊'
+    text: 'It is currently being prepared and would get to you as soon as possible'
+  },
+  
+  
+  {
+    from: 'me',
+    kind: 'text',
+    text: "Thank youuu. Please don’t keep me waiting oo. I'm already salivating 🤤"
+  },
+  {
+    from: 'cafe',
+    kind: 'text',
+    text: 'No long wait here! your goodies will get to you quickly, Fresh, hot and packed with flavour!😊'
   },
   {
     from: 'me',
@@ -336,9 +330,22 @@ const conversation = [
     text: 'Amazing, I can’t wait! 🤤'
   },
   {
+    from: 'me',
+    kind: 'text',
+    text: 'waittt, my food is here already?! You guys are fast! 😍'
+  },
+  {
     from: 'cafe',
     kind: 'sticker',
     text: '🥰🧡'
+  },
+  {
+    from: 'me',
+    kind: 'media',
+    image:
+      '/slider/igchat-image.png',
+    alt: 'A delicious rice dish',
+    caption: 'This FOOD IS INSANELY GOOD!!! 🤤'
   },
   {
     from: 'cafe',
@@ -346,6 +353,7 @@ const conversation = [
     text: 'Your cravings deserve the best! ✨'
   }
 ]
+
 
 const messages = ref([])
 const draft = ref('')
